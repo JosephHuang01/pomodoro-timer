@@ -427,3 +427,15 @@ FodyWeavers.xsd
 *.msix
 *.msm
 *.msp
+=======
+node_modules/
+dist/
+build/
+coverage/
+*.log
+.env*
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+>>>>>>> 6a9b93a (Initial commit)

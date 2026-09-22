@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pomodoro Timer</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="top-bar">
+        <h1>Pomodoro Timer</h1>
+        <button id="settingsToggle" class="secondary-button" type="button" aria-expanded="false">
+          View Options
+        </button>
+      </header>
+
+      <section id="setupPanel" class="panel" aria-label="Pomodoro setup menu">
+        <h2>Start a session</h2>
+        <form id="settingsForm">
+          <div class="field-row">
+            <label for="focusMinutes">Focus minutes</label>
+            <input id="focusMinutes" name="focusMinutes" type="number" min="1" max="120" value="25" />
+          </div>
+          <div class="field-row">
+            <label for="breakMinutes">Break minutes</label>
+            <input id="breakMinutes" name="breakMinutes" type="number" min="1" max="60" value="5" />
+          </div>
+          <div class="field-row">
+            <label for="soundSelect">Sound</label>
+            <select id="soundSelect" name="soundSelect">
+              <option value="chime">Chime</option>
+              <option value="bell">Bell</option>
+              <option value="digital">Digital</option>
+            </select>
+          </div>
+          <button type="submit" class="primary-button">Start Session</button>
+        </form>
+      </section>
+
+      <main id="timerPanel" class="panel hidden" aria-live="polite">
+        <p id="modeLabel" class="mode-label">Focus</p>
+        <div id="timerDisplay" class="timer-display" aria-live="polite">25:00</div>
+
+        <div class="controls" aria-label="Timer controls">
+          <button id="startButton" class="primary-button" type="button">Start</button>
+          <button id="pauseButton" class="secondary-button" type="button">Pause</button>
+          <button id="resetButton" class="danger-button" type="button">Reset</button>
+        </div>
+
+        <div class="options-panel hidden" id="optionsPanel" aria-label="Timer options">
+          <h3>Options</h3>
+          <form id="runtimeSettingsForm">
+            <div class="field-row">
+              <label for="runtimeFocusMinutes">Focus minutes</label>
+              <input id="runtimeFocusMinutes" type="number" min="1" max="120" />
+            </div>
+            <div class="field-row">
+              <label for="runtimeBreakMinutes">Break minutes</label>
+              <input id="runtimeBreakMinutes" type="number" min="1" max="60" />
+            </div>
+            <div class="field-row">
+              <label for="runtimeSoundSelect">Sound</label>
+              <select id="runtimeSoundSelect">
+                <option value="chime">Chime</option>
+                <option value="bell">Bell</option>
+                <option value="digital">Digital</option>
+              </select>
+            </div>
+            <div class="control-group">
+              <button type="submit" class="primary-button">Save Settings</button>
+              <button id="resetFromOptions" type="button" class="danger-button">Reset Timer</button>
+            </div>
+          </form>
+        </div>
+      </main>
+
+      <aside class="panel tasks-panel">
+        <h2>Tasks</h2>
+        <form id="taskForm" class="task-form">
+          <input id="taskInput" type="text" placeholder="Add a task" aria-label="Add a task" />
+          <button type="submit" class="primary-button">Add</button>
+        </form>
+        <ul id="taskList" class="task-list" aria-live="polite"></ul>
+      </aside>
+    </div>
+
+    <script type="module" src="app.js"></script>
+  </body>
+</html>
