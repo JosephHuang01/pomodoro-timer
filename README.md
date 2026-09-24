@@ -1,6 +1,8 @@
 # Pomodoro Timer
 
-A simple, focused productivity app built with plain HTML, CSS, and JavaScript. It helps you work in timed focus sessions, take short breaks, and keep track of tasks without adding unnecessary complexity.
+I am a recent college graduate, and I have been building a growing set of demo projects to continue developing my skills as a software developer. This Pomodoro Timer is one of those projects. It reflects my interest in combining Python-based problem solving, AI application development, and modern web development to create practical tools that are useful, approachable, and easy to understand.
+
+I have been learning how to use AI tools effectively by writing clear instructions, using the right tools for the job, and reviewing the generated code critically instead of treating AI as a black box. This project is a good example of that approach: a simple web app built with careful structure, clean front-end logic, and a focus on real user value.
 
 ## What it does
 
@@ -31,6 +33,8 @@ A simple, focused productivity app built with plain HTML, CSS, and JavaScript. I
 
 This app is a good example of a small front-end product that combines state management, browser persistence, user interaction, and a clean timer loop. It is intentionally approachable, making it a great starting point if you want to understand how a modest JavaScript app is organized.
 
+It also reflects the way I approach building software: I like to learn by shipping small but purposeful projects, exploring tools and frameworks, and applying AI thoughtfully to accelerate development without losing control of the final result.
+
 ## Explore the code
 
 The best way to learn from this project is to start with the app entry points and follow the flow:
@@ -41,6 +45,8 @@ The best way to learn from this project is to start with the app entry points an
 - inspect [src/tasks.js](src/tasks.js) to understand the task list behavior
 
 If you are curious, try adjusting the timer values, adding a new sound option, or improving the task interaction model. There is a lot of room to extend this project in a clean, beginner-friendly way.
+
+If you are an employer or recruiter and want to understand my approach, I encourage you to explore the code and see how I structure a small web app, manage state, and apply AI tools responsibly in real projects.
 
 ## License
 
