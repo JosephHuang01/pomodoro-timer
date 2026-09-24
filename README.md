@@ -4,6 +4,10 @@ I am a recent college graduate, and I have been building a growing set of demo p
 
 I have been learning how to use AI tools effectively by writing clear instructions, using the right tools for the job, and reviewing the generated code critically instead of treating AI as a black box. This project is a good example of that approach: a simple web app built with careful structure, clean front-end logic, and a focus on real user value.
 
+## Live demo
+
+[Open the live portfolio and Pomodoro Timer demo](https://josephhuang01.github.io/pomodoro-timer/)
+
 ## What it does
 
 - Runs a classic pomodoro cycle with configurable focus and break durations
