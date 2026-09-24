@@ -25,10 +25,17 @@ const runtimeFocusMinutes = document.getElementById('runtimeFocusMinutes');
 const runtimeBreakMinutes = document.getElementById('runtimeBreakMinutes');
 const runtimeSoundSelect = document.getElementById('runtimeSoundSelect');
 const resetFromOptions = document.getElementById('resetFromOptions');
+const sessionsCompletedEl = document.getElementById('sessionsCompleted');
+const focusMinutesLoggedEl = document.getElementById('focusMinutesLogged');
+const tasksRemainingEl = document.getElementById('tasksRemaining');
 
 const preferences = getPreferences();
 const timer = new PomodoroTimer(preferences);
 let tasks = loadTasks();
+const summary = {
+  completedSessions: 0,
+  focusMinutesLogged: 0,
+};
 
 function renderPreferencesIntoForm() {
   focusMinutesInput.value = String(preferences.focusMinutes);
@@ -38,6 +45,18 @@ function renderPreferencesIntoForm() {
   runtimeFocusMinutes.value = String(preferences.focusMinutes);
   runtimeBreakMinutes.value = String(preferences.breakMinutes);
   runtimeSoundSelect.value = preferences.sound;
+}
+
+function renderSummary() {
+  if (sessionsCompletedEl) {
+    sessionsCompletedEl.textContent = String(summary.completedSessions);
+  }
+  if (focusMinutesLoggedEl) {
+    focusMinutesLoggedEl.textContent = `${summary.focusMinutesLogged} min`;
+  }
+  if (tasksRemainingEl) {
+    tasksRemainingEl.textContent = String(tasks.filter((task) => !task.completed).length);
+  }
 }
 
 function renderTasks() {
@@ -56,6 +75,7 @@ function renderTasks() {
       tasks = toggleTask(tasks, task.id);
       saveTasks(tasks);
       renderTasks();
+      renderSummary();
     });
 
     const text = document.createElement('span');
@@ -70,6 +90,7 @@ function renderTasks() {
       tasks = removeTask(tasks, task.id);
       saveTasks(tasks);
       renderTasks();
+      renderSummary();
     });
 
     label.appendChild(checkbox);
@@ -78,6 +99,8 @@ function renderTasks() {
     item.appendChild(deleteButton);
     taskList.appendChild(item);
   });
+
+  renderSummary();
 }
 
 function renderTimer() {
@@ -111,9 +134,15 @@ function resetSession() {
 }
 
 function completeCycle() {
+  if (timer.mode === 'focus') {
+    summary.completedSessions += 1;
+    summary.focusMinutesLogged += preferences.focusMinutes;
+  }
+
   const nextMode = timer.toggleMode();
   playNotificationSound(preferences.sound);
   renderTimer();
+  renderSummary();
   if (nextMode === 'break') {
     modeLabel.textContent = 'Break';
   }
@@ -124,61 +153,85 @@ function initializeTimer() {
   renderTimer();
 }
 
-settingsForm.addEventListener('submit', (event) => {
-  event.preventDefault();
-  const nextSettings = normalizeSettings({
-    focusMinutes: Number(focusMinutesInput.value),
-    breakMinutes: Number(breakMinutesInput.value),
-    sound: soundSelect.value,
+if (settingsForm) {
+  settingsForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const nextSettings = normalizeSettings({
+      focusMinutes: Number(focusMinutesInput.value),
+      breakMinutes: Number(breakMinutesInput.value),
+      sound: soundSelect.value,
+    });
+
+    savePreferences(nextSettings);
+    Object.assign(preferences, nextSettings);
+    timer.setSettings(nextSettings);
+    renderPreferencesIntoForm();
+    renderTimer();
+
+    if (setupPanel) {
+      setupPanel.classList.add('hidden');
+    }
+    if (timerPanel) {
+      timerPanel.classList.remove('hidden');
+    }
   });
+}
 
-  savePreferences(nextSettings);
-  Object.assign(preferences, nextSettings);
-  timer.setSettings(nextSettings);
-  renderPreferencesIntoForm();
-  renderTimer();
+if (runtimeSettingsForm) {
+  runtimeSettingsForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const nextSettings = normalizeSettings({
+      focusMinutes: Number(runtimeFocusMinutes.value),
+      breakMinutes: Number(runtimeBreakMinutes.value),
+      sound: runtimeSoundSelect.value,
+    });
 
-  setupPanel.classList.add('hidden');
-  timerPanel.classList.remove('hidden');
-});
-
-runtimeSettingsForm.addEventListener('submit', (event) => {
-  event.preventDefault();
-  const nextSettings = normalizeSettings({
-    focusMinutes: Number(runtimeFocusMinutes.value),
-    breakMinutes: Number(runtimeBreakMinutes.value),
-    sound: runtimeSoundSelect.value,
+    savePreferences(nextSettings);
+    Object.assign(preferences, nextSettings);
+    timer.setSettings(nextSettings);
+    renderPreferencesIntoForm();
+    renderTimer();
+    if (optionsPanel) {
+      optionsPanel.classList.add('hidden');
+    }
+    if (settingsToggle) {
+      settingsToggle.setAttribute('aria-expanded', 'false');
+    }
   });
+}
 
-  savePreferences(nextSettings);
-  Object.assign(preferences, nextSettings);
-  timer.setSettings(nextSettings);
-  renderPreferencesIntoForm();
-  renderTimer();
-  optionsPanel.classList.add('hidden');
-  settingsToggle.setAttribute('aria-expanded', 'false');
-});
+if (settingsToggle && optionsPanel) {
+  settingsToggle.addEventListener('click', () => {
+    const isHidden = optionsPanel.classList.toggle('hidden');
+    settingsToggle.setAttribute('aria-expanded', String(!isHidden));
+  });
+}
 
-settingsToggle.addEventListener('click', () => {
-  const isHidden = optionsPanel.classList.toggle('hidden');
-  settingsToggle.setAttribute('aria-expanded', String(!isHidden));
-});
+if (startButton) {
+  startButton.addEventListener('click', startSession);
+}
+if (pauseButton) {
+  pauseButton.addEventListener('click', pauseSession);
+}
+if (resetButton) {
+  resetButton.addEventListener('click', resetSession);
+}
+if (resetFromOptions) {
+  resetFromOptions.addEventListener('click', resetSession);
+}
 
-startButton.addEventListener('click', startSession);
-pauseButton.addEventListener('click', pauseSession);
-resetButton.addEventListener('click', resetSession);
-resetFromOptions.addEventListener('click', resetSession);
-
-taskForm.addEventListener('submit', (event) => {
-  event.preventDefault();
-  const nextTasks = addTask(tasks, taskInput.value);
-  if (nextTasks.length !== tasks.length) {
-    tasks = nextTasks;
-    saveTasks(tasks);
-    renderTasks();
-  }
-  taskInput.value = '';
-});
+if (taskForm) {
+  taskForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const nextTasks = addTask(tasks, taskInput.value);
+    if (nextTasks.length !== tasks.length) {
+      tasks = nextTasks;
+      saveTasks(tasks);
+      renderTasks();
+    }
+    taskInput.value = '';
+  });
+}
 
 setInterval(() => {
   if (!timer.isRunning) {

@@ -12,11 +12,38 @@ I have been learning how to use AI tools effectively by writing clear instructio
 - Stores preferences and tasks in the browser so your setup persists locally
 - Lets you manage a small task list while you work
 
-## How to run it
+## How to run it locally
 
 1. Open the project folder in your editor.
-2. Launch the app by opening the file [src/index.html](src/index.html) in a browser.
-3. If you prefer a local preview workflow, use a simple static server or the browser preview extension in VS Code.
+2. Start a static server from the project root:
+
+	```powershell
+	python -m http.server 8123
+	```
+
+3. Open [http://localhost:8123](http://localhost:8123) to view the portfolio landing page and embedded app.
+
+The original standalone timer entry point remains available at [src/index.html](src/index.html).
+
+## Deploy with GitHub Pages
+
+This is a static site, so GitHub Pages can deploy it directly from the repository root.
+
+1. Push the repository to GitHub:
+
+	```powershell
+	git add .
+	git commit -m "Prepare portfolio site for deployment"
+	git push origin main
+	```
+
+2. Open the repository on GitHub and go to **Settings** → **Pages**.
+3. Under **Build and deployment**, choose **Deploy from a branch**.
+4. Select the `main` branch and the `/ (root)` folder, then click **Save**.
+5. Wait for the deployment workflow to finish. The public URL will be:
+	`https://josephhuang01.github.io/pomodoro-timer/`
+
+The root [index.html](index.html) is the public portfolio page. No build command or publish directory configuration is required.
 
 ## Project structure
 

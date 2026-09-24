@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Joseph Huang | Python + AI Developer</title>
+    <meta
+      name="description"
+      content="Recent graduate and developer building practical AI-assisted applications and web tools."
+    />
+    <link rel="stylesheet" href="src/styles.css" />
+  </head>
+  <body>
+    <div class="portfolio-page">
+      <header class="site-header">
+        <nav class="top-nav" aria-label="Main navigation">
+          <div class="brand-wrap">
+            <div class="brand-mark">JH</div>
+            <div>
+              <p class="brand-name">Joseph Huang</p>
+            </div>
+          </div>
+
+          <div class="nav-links">
+            <a href="#about">About</a>
+            <a href="#projects">Projects</a>
+            <a href="#skills">Skills</a>
+            <a href="#contact">Contact</a>
+          </div>
+
+          <button id="settingsToggle" class="secondary-button" type="button" aria-expanded="false">
+            Adjust settings
+          </button>
+          <a class="nav-button" href="#contact">Let’s connect</a>
+        </nav>
+      </header>
+
+      <main>
+        <section class="hero" aria-label="Introduction">
+          <div class="hero-copy">
+            <p class="eyebrow">Recent graduate • Python &amp; AI developer</p>
+            <h1>I build useful tools, AI-assisted workflows, and polished web experiences.</h1>
+            <p class="hero-text">
+              I’m a recent college graduate creating demo projects to grow my skills in Python,
+              AI application development, and front-end engineering. This Pomodoro app is one of
+              several projects I’m building to practice clear design, user-centered thinking, and
+              thoughtful AI-assisted development.
+            </p>
+            <div class="hero-actions">
+              <a class="primary-button hero-button" href="#projects">View projects</a>
+              <a class="secondary-button hero-button subtle" href="#contact">Contact me</a>
+            </div>
+            <ul class="hero-meta" aria-label="Developer strengths">
+              <li>Python</li>
+              <li>AI tooling</li>
+              <li>JavaScript</li>
+              <li>Web apps</li>
+            </ul>
+          </div>
+
+          <div class="summary-grid" aria-label="Focus summary">
+            <div class="stat-card">
+              <span class="stat-label">Sessions</span>
+              <strong id="sessionsCompleted">0</strong>
+            </div>
+            <div class="stat-card">
+              <span class="stat-label">Focus time</span>
+              <strong id="focusMinutesLogged">0 min</strong>
+            </div>
+            <div class="stat-card">
+              <span class="stat-label">Tasks left</span>
+              <strong id="tasksRemaining">0</strong>
+            </div>
+          </div>
+
+          <aside class="profile-card" aria-label="Quick profile summary">
+            <div class="profile-badge">Available for opportunities</div>
+            <h2>Software developer</h2>
+            <p>
+              I enjoy turning ideas into simple, practical tools and learning by building projects
+              that solve real problems.
+            </p>
+            <div class="mini-stats" aria-label="Skill summary">
+              <div>
+                <strong>3+</strong>
+                <span>Demo projects</span>
+              </div>
+              <div>
+                <strong>AI</strong>
+                <span>Workflow design</span>
+              </div>
+              <div>
+                <strong>Web</strong>
+                <span>App building</span>
+              </div>
+            </div>
+          </aside>
+        </section>
+
+        <section id="about" class="info-panel">
+          <div class="section-heading">
+            <p class="eyebrow">About</p>
+            <h2>Building with curiosity and practical problem-solving.</h2>
+          </div>
+          <div class="about-grid">
+            <p>
+              I’m a recent graduate with a strong interest in software engineering, AI tools, and
+              product-focused development. I’ve been creating a growing number of demo projects to
+              sharpen my skills and explore how to build useful digital products from idea to
+              execution.
+            </p>
+            <p>
+              I like to use AI intentionally: writing clear instructions, choosing the right tools,
+              and reviewing the result critically so the final product is genuinely useful and well
+              structured.
+            </p>
+          </div>
+        </section>
+
+        <section id="skills" class="skills-panel">
+          <div class="section-heading">
+            <p class="eyebrow">Skills</p>
+            <h2>What I’m working with</h2>
+          </div>
+          <div class="skills-grid">
+            <span>Python</span>
+            <span>JavaScript</span>
+            <span>HTML &amp; CSS</span>
+            <span>AI workflows</span>
+            <span>Prompt design</span>
+            <span>Product thinking</span>
+            <span>Problem solving</span>
+            <span>Web prototyping</span>
+          </div>
+        </section>
+
+        <section id="projects" class="project-showcase">
+          <div class="section-heading">
+            <p class="eyebrow">Featured project</p>
+            <h2>Pomodoro Timer</h2>
+          </div>
+
+          <div class="project-summary">
+            <div class="project-copy">
+              <p>
+                This project is a focused productivity app built to help manage work sessions, track
+                tasks, and create a calmer workflow. It reflects my interest in simple interfaces,
+                thoughtful UX, and practical app logic.
+              </p>
+              <div class="project-links">
+                <a class="primary-button" href="#dashboard">Open the app</a>
+                <a class="secondary-button" href="https://github.com/JosephHuang01/pomodoro-timer" target="_blank" rel="noreferrer">GitHub</a>
+              </div>
+            </div>
+
+            <div class="project-bullet-list">
+              <ul>
+                <li>Custom focus and break timers</li>
+                <li>Local task tracking</li>
+                <li>Browser-based preferences and state</li>
+                <li>Clean, responsive UI</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <main id="dashboard" class="dashboard">
+          <section id="setupPanel" class="panel" aria-label="Pomodoro setup menu">
+            <div class="panel-header">
+              <h2>Start a session</h2>
+              <span class="chip">Ready</span>
+            </div>
+
+            <form id="settingsForm" class="settings-form">
+              <div class="field-row">
+                <label for="focusMinutes">Focus minutes</label>
+                <input id="focusMinutes" name="focusMinutes" type="number" min="1" max="120" value="25" />
+              </div>
+              <div class="field-row">
+                <label for="breakMinutes">Break minutes</label>
+                <input id="breakMinutes" name="breakMinutes" type="number" min="1" max="60" value="5" />
+              </div>
+              <div class="field-row">
+                <label for="soundSelect">Sound</label>
+                <select id="soundSelect" name="soundSelect">
+                  <option value="chime">Chime</option>
+                  <option value="bell">Bell</option>
+                  <option value="digital">Digital</option>
+                </select>
+              </div>
+              <button type="submit" class="primary-button">Start Session</button>
+            </form>
+          </section>
+
+          <section id="timerPanel" class="panel timer-panel hidden" aria-live="polite">
+            <div class="timer-header">
+              <div class="badge-group">
+                <span class="chip chip-accent">Current mode</span>
+                <p id="modeLabel" class="mode-label">Focus</p>
+              </div>
+            </div>
+
+            <div id="timerDisplay" class="timer-display" aria-live="polite">25:00</div>
+
+            <div class="controls" aria-label="Timer controls">
+              <button id="startButton" class="primary-button" type="button">Start</button>
+              <button id="pauseButton" class="secondary-button" type="button">Pause</button>
+              <button id="resetButton" class="danger-button" type="button">Reset</button>
+            </div>
+
+            <div class="options-panel hidden" id="optionsPanel" aria-label="Timer options">
+              <h3>Options</h3>
+              <form id="runtimeSettingsForm">
+                <div class="field-row">
+                  <label for="runtimeFocusMinutes">Focus minutes</label>
+                  <input id="runtimeFocusMinutes" type="number" min="1" max="120" />
+                </div>
+                <div class="field-row">
+                  <label for="runtimeBreakMinutes">Break minutes</label>
+                  <input id="runtimeBreakMinutes" type="number" min="1" max="60" />
+                </div>
+                <div class="field-row">
+                  <label for="runtimeSoundSelect">Sound</label>
+                  <select id="runtimeSoundSelect">
+                    <option value="chime">Chime</option>
+                    <option value="bell">Bell</option>
+                    <option value="digital">Digital</option>
+                  </select>
+                </div>
+                <div class="control-group">
+                  <button type="submit" class="primary-button">Save Settings</button>
+                  <button id="resetFromOptions" type="button" class="danger-button">Reset Timer</button>
+                </div>
+              </form>
+            </div>
+          </section>
+
+          <aside class="panel tasks-panel">
+            <div class="panel-header">
+              <h2>Tasks</h2>
+              <span class="chip chip-muted">Focus list</span>
+            </div>
+
+            <form id="taskForm" class="task-form">
+              <input id="taskInput" type="text" placeholder="Add a task" aria-label="Add a task" />
+              <button type="submit" class="primary-button">Add</button>
+            </form>
+            <ul id="taskList" class="task-list" aria-live="polite"></ul>
+          </aside>
+        </main>
+
+        <footer id="contact" class="site-footer">
+          <h3>Let’s build something useful.</h3>
+          <p>I’m open to opportunities, collaborations, and conversations about software, AI, and product ideas.</p>
+          <a class="primary-button" href="https://github.com/JosephHuang01" target="_blank" rel="noreferrer">Connect on GitHub</a>
+        </footer>
+      </main>
+    </div>
+
+    <script type="module" src="src/app.js"></script>
+  </body>
+</html>

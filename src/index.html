@@ -4,85 +4,159 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pomodoro Timer</title>
+    <meta
+      name="description"
+      content="A polished Pomodoro timer for focused work sessions, short breaks, and task tracking."
+    />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <div class="app-shell">
+    <div class="page-shell">
       <header class="top-bar">
-        <h1>Pomodoro Timer</h1>
+        <div class="brand-wrap">
+          <div class="brand-mark">P</div>
+          <div>
+            <p class="brand-name">Pomodoro</p>
+            <span class="brand-tag">Focus flow</span>
+          </div>
+        </div>
+
         <button id="settingsToggle" class="secondary-button" type="button" aria-expanded="false">
-          View Options
+          Adjust settings
         </button>
       </header>
 
-      <section id="setupPanel" class="panel" aria-label="Pomodoro setup menu">
-        <h2>Start a session</h2>
-        <form id="settingsForm">
-          <div class="field-row">
-            <label for="focusMinutes">Focus minutes</label>
-            <input id="focusMinutes" name="focusMinutes" type="number" min="1" max="120" value="25" />
+      <section class="hero" aria-label="Pomodoro overview">
+        <div class="hero-copy">
+          <p class="eyebrow">Productivity system</p>
+          <h1>Work in focused sprints, then reset with intention.</h1>
+          <p class="hero-text">
+            Keep momentum through short, deliberate work intervals and quick mental resets.
+          </p>
+          <div class="hero-actions">
+            <a class="primary-button hero-button" href="#dashboard">Start a sprint</a>
+            <a class="secondary-button hero-button subtle" href="#features">See features</a>
           </div>
-          <div class="field-row">
-            <label for="breakMinutes">Break minutes</label>
-            <input id="breakMinutes" name="breakMinutes" type="number" min="1" max="60" value="5" />
-          </div>
-          <div class="field-row">
-            <label for="soundSelect">Sound</label>
-            <select id="soundSelect" name="soundSelect">
-              <option value="chime">Chime</option>
-              <option value="bell">Bell</option>
-              <option value="digital">Digital</option>
-            </select>
-          </div>
-          <button type="submit" class="primary-button">Start Session</button>
-        </form>
-      </section>
-
-      <main id="timerPanel" class="panel hidden" aria-live="polite">
-        <p id="modeLabel" class="mode-label">Focus</p>
-        <div id="timerDisplay" class="timer-display" aria-live="polite">25:00</div>
-
-        <div class="controls" aria-label="Timer controls">
-          <button id="startButton" class="primary-button" type="button">Start</button>
-          <button id="pauseButton" class="secondary-button" type="button">Pause</button>
-          <button id="resetButton" class="danger-button" type="button">Reset</button>
         </div>
 
-        <div class="options-panel hidden" id="optionsPanel" aria-label="Timer options">
-          <h3>Options</h3>
-          <form id="runtimeSettingsForm">
+        <div class="summary-grid" aria-label="Focus summary">
+          <div class="stat-card">
+            <span class="stat-label">Sessions</span>
+            <strong id="sessionsCompleted">0</strong>
+          </div>
+          <div class="stat-card">
+            <span class="stat-label">Focus time</span>
+            <strong id="focusMinutesLogged">0 min</strong>
+          </div>
+          <div class="stat-card">
+            <span class="stat-label">Tasks left</span>
+            <strong id="tasksRemaining">0</strong>
+          </div>
+        </div>
+      </section>
+
+      <section id="features" class="features" aria-label="Feature highlights">
+        <div class="feature-card">
+          <span class="feature-icon">⏱</span>
+          <h3>Pomodoro rhythm</h3>
+          <p>Switch between deep work and recovery breaks to stay engaged without burning out.</p>
+        </div>
+        <div class="feature-card">
+          <span class="feature-icon">✓</span>
+          <h3>Task clarity</h3>
+          <p>Keep a short, actionable list in view while your timer stays front and center.</p>
+        </div>
+        <div class="feature-card">
+          <span class="feature-icon">🔊</span>
+          <h3>Gentle reminders</h3>
+          <p>Use a subtle sound cue to mark session transitions without breaking your flow.</p>
+        </div>
+      </section>
+
+      <main id="dashboard" class="dashboard">
+        <section id="setupPanel" class="panel" aria-label="Pomodoro setup menu">
+          <div class="panel-header">
+            <h2>Start a session</h2>
+            <span class="chip">Ready</span>
+          </div>
+
+          <form id="settingsForm" class="settings-form">
             <div class="field-row">
-              <label for="runtimeFocusMinutes">Focus minutes</label>
-              <input id="runtimeFocusMinutes" type="number" min="1" max="120" />
+              <label for="focusMinutes">Focus minutes</label>
+              <input id="focusMinutes" name="focusMinutes" type="number" min="1" max="120" value="25" />
             </div>
             <div class="field-row">
-              <label for="runtimeBreakMinutes">Break minutes</label>
-              <input id="runtimeBreakMinutes" type="number" min="1" max="60" />
+              <label for="breakMinutes">Break minutes</label>
+              <input id="breakMinutes" name="breakMinutes" type="number" min="1" max="60" value="5" />
             </div>
             <div class="field-row">
-              <label for="runtimeSoundSelect">Sound</label>
-              <select id="runtimeSoundSelect">
+              <label for="soundSelect">Sound</label>
+              <select id="soundSelect" name="soundSelect">
                 <option value="chime">Chime</option>
                 <option value="bell">Bell</option>
                 <option value="digital">Digital</option>
               </select>
             </div>
-            <div class="control-group">
-              <button type="submit" class="primary-button">Save Settings</button>
-              <button id="resetFromOptions" type="button" class="danger-button">Reset Timer</button>
-            </div>
+            <button type="submit" class="primary-button">Start Session</button>
           </form>
-        </div>
-      </main>
+        </section>
 
-      <aside class="panel tasks-panel">
-        <h2>Tasks</h2>
-        <form id="taskForm" class="task-form">
-          <input id="taskInput" type="text" placeholder="Add a task" aria-label="Add a task" />
-          <button type="submit" class="primary-button">Add</button>
-        </form>
-        <ul id="taskList" class="task-list" aria-live="polite"></ul>
-      </aside>
+        <section id="timerPanel" class="panel timer-panel hidden" aria-live="polite">
+          <div class="timer-header">
+            <div class="badge-group">
+              <span class="chip chip-accent">Current mode</span>
+              <p id="modeLabel" class="mode-label">Focus</p>
+            </div>
+          </div>
+
+          <div id="timerDisplay" class="timer-display" aria-live="polite">25:00</div>
+
+          <div class="controls" aria-label="Timer controls">
+            <button id="startButton" class="primary-button" type="button">Start</button>
+            <button id="pauseButton" class="secondary-button" type="button">Pause</button>
+            <button id="resetButton" class="danger-button" type="button">Reset</button>
+          </div>
+
+          <div class="options-panel hidden" id="optionsPanel" aria-label="Timer options">
+            <h3>Options</h3>
+            <form id="runtimeSettingsForm">
+              <div class="field-row">
+                <label for="runtimeFocusMinutes">Focus minutes</label>
+                <input id="runtimeFocusMinutes" type="number" min="1" max="120" />
+              </div>
+              <div class="field-row">
+                <label for="runtimeBreakMinutes">Break minutes</label>
+                <input id="runtimeBreakMinutes" type="number" min="1" max="60" />
+              </div>
+              <div class="field-row">
+                <label for="runtimeSoundSelect">Sound</label>
+                <select id="runtimeSoundSelect">
+                  <option value="chime">Chime</option>
+                  <option value="bell">Bell</option>
+                  <option value="digital">Digital</option>
+                </select>
+              </div>
+              <div class="control-group">
+                <button type="submit" class="primary-button">Save Settings</button>
+                <button id="resetFromOptions" type="button" class="danger-button">Reset Timer</button>
+              </div>
+            </form>
+          </div>
+        </section>
+
+        <aside class="panel tasks-panel">
+          <div class="panel-header">
+            <h2>Tasks</h2>
+            <span class="chip chip-muted">Focus list</span>
+          </div>
+
+          <form id="taskForm" class="task-form">
+            <input id="taskInput" type="text" placeholder="Add a task" aria-label="Add a task" />
+            <button type="submit" class="primary-button">Add</button>
+          </form>
+          <ul id="taskList" class="task-list" aria-live="polite"></ul>
+        </aside>
+      </main>
     </div>
 
     <script type="module" src="app.js"></script>
