@@ -53,6 +53,12 @@ a:focus-visible {
   padding: 1.2rem 1.25rem 3rem;
 }
 
+.page-shell {
+  width: min(100%, 1100px);
+  margin: 0 auto;
+  padding: 1.2rem 1.25rem 3rem;
+}
+
 .site-header {
   position: sticky;
   top: 0;
@@ -71,6 +77,13 @@ a:focus-visible {
   border-radius: 18px;
   background: rgba(8, 16, 27, 0.6);
   box-shadow: var(--shadow);
+}
+
+.top-bar {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
 }
 
 .brand-wrap {
@@ -655,6 +668,10 @@ input, select {
 
 @media (max-width: 680px) {
   .portfolio-page {
+    padding: 1rem 0.9rem 2.5rem;
+  }
+
+  .page-shell {
     padding: 1rem 0.9rem 2.5rem;
   }
 
